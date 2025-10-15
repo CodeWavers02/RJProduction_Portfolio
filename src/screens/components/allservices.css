@@ -1,0 +1,374 @@
+/* Services Horizontal Section */
+.services-horizontal-section {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.services-horizontal-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+/* Left Side - Text Content */
+.services-horizontal-text {
+  flex: 0 0 35%;
+  padding: 2rem 0;
+}
+
+.services-horizontal-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #111;
+}
+
+.services-gradient-text {
+  background: linear-gradient(135deg, #0077ff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.services-horizontal-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.services-horizontal-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.services-stat {
+  text-align: left;
+}
+
+.services-stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0077ff;
+  margin-bottom: 0.5rem;
+}
+
+.services-stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Right Side - Horizontal Images */
+.services-horizontal-images {
+  flex: 1;
+  overflow: hidden;
+}
+
+.services-images-wrapper {
+  display: flex;
+  gap: 1rem;
+  height: 500px;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+/* Individual Service Items */
+.services-horizontal-item {
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Collapsed State - Default for all except active */
+.services-horizontal-item {
+  width: 100px;
+}
+
+/* Expanded State - Only for active item */
+.services-horizontal-item.services-active {
+  width: 400px;
+}
+
+/* Image Container */
+.services-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.services-horizontal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.services-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 119, 255, 0.2), rgba(0, 198, 255, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.services-horizontal-item.services-active .services-image-overlay {
+  opacity: 1;
+}
+
+/* Expanded Content */
+.services-expanded-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  transform: translateY(100%);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+}
+
+/* Reset animation state when not active */
+.services-horizontal-item:not(.services-active) .services-expanded-content {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+/* Delayed animation for active state */
+.services-horizontal-item.services-active .services-expanded-content {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s; /* 0.3s delay */
+}
+
+.services-expanded-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: white;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.4s; /* 0.4s delay */
+}
+
+.services-expanded-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.5s; /* 0.5s delay */
+}
+
+.services-expanded-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00c6ff;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease 0.6s; /* 0.6s delay */
+}
+
+/* Apply animations when active */
+.services-horizontal-item.services-active .services-expanded-title,
+.services-horizontal-item.services-active .services-expanded-description,
+.services-horizontal-item.services-active .services-expanded-cta {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.services-horizontal-item.services-active .services-expanded-cta {
+  transform: translateX(0);
+}
+
+.services-arrow {
+  transition: transform 0.3s ease;
+}
+
+.services-horizontal-item.services-active:hover .services-arrow {
+  transform: translateX(5px);
+}
+
+/* Hover Effects */
+.services-horizontal-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 119, 255, 0.2);
+}
+
+.services-horizontal-item.services-active:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* First item expanded by default */
+.services-horizontal-item:first-child.services-active {
+  width: 400px;
+}
+
+/* Ensure only one image is expanded at a time */
+.services-horizontal-item:not(.services-active) {
+  width: 100px;
+}
+
+.services-horizontal-item.services-active {
+  width: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .services-horizontal-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .services-horizontal-text {
+    flex: none;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .services-horizontal-stats {
+    justify-content: center;
+  }
+  
+  .services-images-wrapper {
+    height: 400px;
+  }
+  
+  .services-horizontal-item:not(.services-active) {
+    width: 80px;
+  }
+  
+  .services-horizontal-item.services-active {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-horizontal-section {
+    padding: 2rem 1rem;
+  }
+  
+  .services-horizontal-title {
+    font-size: 2.8rem;
+  }
+  
+  .services-images-wrapper {
+    height: 350px;
+    gap: 0.8rem;
+  }
+  
+  .services-horizontal-item:not(.services-active) {
+    width: 60px;
+  }
+  
+  .services-horizontal-item.services-active {
+    width: 250px;
+  }
+  
+  .services-expanded-content {
+    padding: 1.5rem;
+  }
+  
+  .services-expanded-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-horizontal-title {
+    font-size: 2.2rem;
+  }
+  
+  .services-horizontal-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .services-images-wrapper {
+    height: 300px;
+    gap: 0.5rem;
+  }
+  
+  .services-horizontal-item:not(.services-active) {
+    width: 50px;
+  }
+  
+  .services-horizontal-item.services-active {
+    width: 200px;
+  }
+  
+  .services-expanded-content {
+    padding: 1rem;
+  }
+  
+  .services-expanded-title {
+    font-size: 1.1rem;
+  }
+  
+  .services-expanded-description {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* Smooth animations */
+.services-horizontal-item {
+  will-change: transform, width;
+}
+
+.services-expanded-content {
+  will-change: transform, opacity;
+}
+
+/* Focus states for accessibility */
+.services-horizontal-item:focus {
+  outline: 2px solid #0077ff;
+  outline-offset: 4px;
+}
+
+/* Loading animation */
+.services-horizontal-image {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: services-loading 1.5s infinite;
+}
+
+@keyframes services-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

@@ -1,0 +1,141 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  /* display: flex; */
+  /* place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+
+/* Aura/glow elements */
+.aura {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.9; /* increased opacity */
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+/* Different aura blobs with more visibility */
+.aura:nth-child(1) {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(255,78,80,0.8), transparent 70%);
+  top: 5%;
+  left: 10%;
+  animation: moveAura1 8s infinite alternate;
+}
+
+.aura:nth-child(2) {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(105,42,255,0.7), transparent 70%);
+  top: 50%;
+  left: 60%;
+  animation: moveAura2 10s infinite alternate;
+}
+
+.aura:nth-child(3) {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(249,212,35,0.8), transparent 70%);
+  top: 65%;
+  left: 30%;
+  animation: moveAura3 12s infinite alternate;
+}
+
+.aura:nth-child(4) {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(0,255,255,0.7), transparent 70%);
+  top: 30%;
+  left: 40%;
+  animation: moveAura4 15s infinite alternate;
+}
+
+/* Keyframes with visible movement */
+@keyframes moveAura1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(250px, -150px) scale(1.3); }
+  100% { transform: translate(-250px, 150px) scale(1); }
+}
+
+@keyframes moveAura2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-180px, 140px) scale(1.2); }
+  100% { transform: translate(180px, -140px) scale(1); }
+}
+
+@keyframes moveAura3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(150px, 220px) scale(1.25); }
+  100% { transform: translate(-150px, -220px) scale(1); }
+}
+
+@keyframes moveAura4 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-200px, -150px) scale(1.2); }
+  100% { transform: translate(200px, 150px) scale(1); }
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

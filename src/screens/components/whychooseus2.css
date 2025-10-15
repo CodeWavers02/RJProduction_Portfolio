@@ -1,0 +1,346 @@
+/* Why Choose Us Section - Light Theme */
+.why-choose-us-section {
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  font-family: 'Inter', 'Poppins', sans-serif;
+  color: #333;
+  overflow: hidden;
+}
+
+.why-choose-us-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+/* Left Side - Content */
+.why-choose-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Main Heading Box */
+.main-heading-box {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.main-heading-box.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.main-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+.accent-text {
+  color: #0077ff;
+  position: relative;
+}
+
+.accent-text::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #0077ff, #00c6ff);
+  border-radius: 2px;
+}
+
+.main-description {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+.visit-site-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #0077ff, #00c6ff);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
+}
+
+.visit-site-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4);
+  gap: 1rem;
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.visit-site-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+/* Reasons Row */
+.reasons-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* Reason Boxes */
+.reason-box {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.reason-box.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reason-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 119, 255, 0.15);
+  border-color: #0077ff;
+}
+
+.reason-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #0077ff, #00c6ff);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  transform: scale(0);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reason-box.animate-in .reason-icon {
+  transform: scale(1);
+}
+
+.reason-box:hover .reason-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.reason-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.reason-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Right Side - Image */
+.why-choose-image {
+  position: relative;
+}
+
+.image-container {
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+}
+
+.image-container.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.image-container:hover .main-image {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(0, 198, 255, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Bottom Reasons Section */
+.bottom-reasons-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease 0.4s;
+}
+
+.bottom-reasons-section.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bottom-reasons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.bottom-reason {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.bottom-reason.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .why-choose-us-container {
+    gap: 3rem;
+  }
+  
+  .main-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-choose-us-section {
+    padding: 4rem 1rem;
+  }
+  
+  .why-choose-us-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .why-choose-content {
+    order: 2;
+  }
+  
+  .why-choose-image {
+    order: 1;
+  }
+  
+  .image-container {
+    height: 400px;
+  }
+  
+  .main-title {
+    font-size: 2.2rem;
+  }
+  
+  .reasons-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .bottom-reasons-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2rem;
+  }
+  
+  .main-description {
+    font-size: 1.1rem;
+  }
+  
+  .reason-box {
+    padding: 1.5rem;
+  }
+  
+  .reason-title {
+    font-size: 1.2rem;
+  }
+  
+  .visit-site-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Smooth animations */
+.reason-box,
+.main-heading-box,
+.image-container,
+.bottom-reasons-section {
+  will-change: transform, opacity;
+}
+
+/* Focus states for accessibility */
+.visit-site-btn:focus,
+.reason-box:focus {
+  outline: 2px solid #0077ff;
+  outline-offset: 4px;
+}
+
+/* Loading animation for image */
+.main-image {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
