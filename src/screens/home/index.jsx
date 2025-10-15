@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "../../global/Header";
-import Main from "../../screens/components/main";
+import Main from "../components/Main";
 import AboutMe from "../components/AboutMe";
 import AllServices from "../components/AllServices";
 import WhyChooseUs from "../components/WhyChooseUs";
@@ -8,17 +7,15 @@ import WhyChooseUs from "../components/WhyChooseUs";
 const Home = () => {
   return (
     <>
-      <Header />
-      
       <Main />
       <AboutMe />
-       <div className="aura"></div>
-  <div className="aura"></div>
-  <div className="aura"></div>
-  <div className="aura"></div>
+      <div className="aura"></div>
+      <div className="aura"></div>
+      <div className="aura"></div>
+      <div className="aura"></div>
       <AllServices />
       <WhyChooseUs />
-      <div style={{ marginTop: '200px' }}>
+      <div style={{ marginTop: "200px" }}>
         {/* Additional content if needed */}
       </div>
     </>
