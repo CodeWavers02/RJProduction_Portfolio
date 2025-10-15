@@ -1,0 +1,7 @@
+.headerArea {
+  border: 1px solid black;
+  padding: 40px;       /* space inside the border */
+  min-height: 200px;   /* ensures it has visible area */
+  color: black;
+  margin-top: 200px;
+}

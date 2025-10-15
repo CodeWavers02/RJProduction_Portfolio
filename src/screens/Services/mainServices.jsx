@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import "./css/MainServices.css";
 
-function MainServices() {
+const MainServices = () => {
   return (
-    <div>
-      <h1>hello worlds</h1>
+    <div className="headerArea">
+      <h1>Our Services</h1>
+      {/* <p></p> */}
     </div>
-  )
-}
+  );
+};
 
-export default MainServices
+export default MainServices;
