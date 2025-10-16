@@ -4,44 +4,57 @@ import sampleImg from "../../assets/img2.jpg";
 
 const WhyChooseUs = () => {
   const reasonsLeft = [
-    { title: "SAMPLE HEADLINE", text: "Sample text. Click to select the text box." },
-    { title: "SAMPLE HEADLINE", text: "Sample text. Click to select the text box." },
+    { 
+      title: "Innovative Solutions", 
+      text: "We craft cutting-edge digital experiences that push boundaries and deliver exceptional results.",
+      icon: "💡"
+    },
+    { 
+      title: "Proven Results", 
+      text: "Our strategies are data-driven and tested to ensure maximum impact for your business.",
+      icon: "📊"
+    },
   ];
 
   const reasonsRightBottom = [
-    { title: "SAMPLE HEADLINE", text: "Sample text. Click to select the text box." },
-    { title: "SAMPLE HEADLINE", text: "Sample text. Click to select the text box." },
+    { 
+      title: "Dedicated Support", 
+      text: "We provide continuous support and maintenance to keep your digital presence flawless.",
+      icon: "🛠️"
+    },
+    { 
+      title: "Creative Excellence", 
+      text: "Every project is treated with artistic vision and technical precision for outstanding outcomes.",
+      icon: "🎨"
+    },
   ];
 
   const [animatedLetters, setAnimatedLetters] = useState([]);
-  const [currentBlueIndex, setCurrentBlueIndex] = useState(-1);
+  const [currentHighlightIndex, setCurrentHighlightIndex] = useState(-1);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // Split the heading into letters for animation
-    const heading = "WHY CHOOSE US?";
+    const heading = "WHY CHOOSE US";
     const letters = heading.split("").map((letter, index) => ({
       char: letter,
       id: index,
-      isBlue: false
+      isHighlighted: false
     }));
     setAnimatedLetters(letters);
 
-    // Start color animation only when visible
     let interval;
     if (isVisible) {
-      setCurrentBlueIndex(-1);
+      setCurrentHighlightIndex(-1);
       
-      // Start the blue letter animation after a delay
       setTimeout(() => {
         interval = setInterval(() => {
-          setCurrentBlueIndex(prev => {
+          setCurrentHighlightIndex(prev => {
             const nextIndex = (prev + 1) % heading.length;
             return nextIndex;
           });
-        }, 300); // Change blue letter every 300ms
-      }, 1000);
+        }, 400);
+      }, 1200);
     }
 
     return () => {
@@ -49,14 +62,11 @@ const WhyChooseUs = () => {
     };
   }, [isVisible]);
 
-  // Intersection Observer for scroll animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-        } else {
-          setIsVisible(false);
         }
       },
       { threshold: 0.3 }
@@ -73,32 +83,24 @@ const WhyChooseUs = () => {
     };
   }, []);
 
-  const getLetterStyle = (index, letter) => {
-    if (letter === "W") {
-      return {
-        background: 'white',
-        textShadow: '0 0 10px rgba(0,0,0,0.3)',
-        WebkitTextStroke: '2px black',
-        color: 'white'
-      };
-    }
-    
-    if (index === currentBlueIndex) {
+  const getLetterStyle = (index) => {
+    if (index === currentHighlightIndex) {
       return {
         color: '#007bff',
-        textShadow: '0 0 10px rgba(0, 123, 255, 0.3)',
-        transform: 'scale(1.2)'
+        textShadow: '0 0 20px rgba(0, 123, 255, 0.5)',
+        transform: 'scale(1.1) translateY(-2px)'
       };
     }
     
     return {
-      color: '#000000'
+      color: '#ffffff'
     };
   };
 
   return (
     <section className="why-section" ref={sectionRef}>
       <div className={`why-container ${isVisible ? 'visible' : ''}`}>
+        
         {/* Left Side - Two stacked boxes */}
         <div className="why-left">
           {reasonsLeft.map((item, index) => (
@@ -107,8 +109,10 @@ const WhyChooseUs = () => {
               key={index}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
+              <div className="box-icon">{item.icon}</div>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
+              <div className="box-glow"></div>
               <div className="box-hover-effect"></div>
             </div>
           ))}
@@ -116,8 +120,16 @@ const WhyChooseUs = () => {
 
         {/* Center Image */}
         <div className={`why-center ${isVisible ? 'animate-in' : ''}`}>
-          <img src={sampleImg} alt="Why Choose Us" />
-          <div className="image-glow"></div>
+          <div className="image-container">
+            <img src={sampleImg} alt="Why Choose Us" />
+            <div className="image-overlay"></div>
+            <div className="image-glow"></div>
+          </div>
+          <div className="floating-elements">
+            <div className="floating-element el-1"></div>
+            <div className="floating-element el-2"></div>
+            <div className="floating-element el-3"></div>
+          </div>
         </div>
 
         {/* Right Side */}
@@ -125,47 +137,59 @@ const WhyChooseUs = () => {
           {/* Top Right - Why Choose Us */}
           <div className="why-top-right">
             <div className={`why-heading-box ${isVisible ? 'animate-in' : ''}`}>
-              <h2 className="animated-heading">
-                {animatedLetters.map((letter, index) => (
-                  <span
-                    key={letter.id}
-                    className="heading-letter"
-                    style={{
-                      animationDelay: `${index * 0.1}s`,
-                      ...getLetterStyle(index, letter.char),
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    {letter.char}
-                  </span>
-                ))}
-              </h2>
-              <p className="animated-description">
-                Everyday we work hard to make life of our clients better and happier.
-              </p>
-              <div className="floating-dots">
-                <div className="dot"></div>
-                <div className="dot"></div>
-                <div className="dot"></div>
+              <div className="heading-content">
+                <h2 className="animated-heading">
+                  {animatedLetters.map((letter, index) => (
+                    <span
+                      key={letter.id}
+                      className="heading-letter"
+                      style={{
+                        animationDelay: `${index * 0.1}s`,
+                        ...getLetterStyle(index),
+                        transition: 'all 0.3s ease'
+                      }}
+                    >
+                      {letter.char}
+                    </span>
+                  ))}
+                </h2>
+                <p className="animated-description">
+                  We combine creativity with technology to deliver exceptional digital experiences 
+                  that drive real results for your business.
+                </p>
               </div>
+              <div className="accent-line"></div>
             </div>
           </div>
 
           {/* Bottom Right - Two side by side boxes */}
-          <div className={`why-bottom-right ${isVisible ? 'animate-in' : ''}`}>
+          <div className="why-bottom-right">
             {reasonsRightBottom.map((item, index) => (
               <div 
-                className="why-box right-box" 
+                className={`why-box right-box ${isVisible ? 'animate-in' : ''}`} 
                 key={index}
                 style={{ animationDelay: `${0.6 + index * 0.2}s` }}
               >
+                <div className="box-icon">{item.icon}</div>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
                 <div className="box-highlight"></div>
+                <div className="box-particles">
+                  <div className="particle"></div>
+                  <div className="particle"></div>
+                  <div className="particle"></div>
+                </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Background Elements */}
+      <div className="background-elements">
+        <div className="bg-circle circle-1"></div>
+        <div className="bg-circle circle-2"></div>
+        <div className="bg-circle circle-3"></div>
       </div>
     </section>
   );
