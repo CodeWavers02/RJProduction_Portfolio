@@ -1,7 +1,75 @@
-.headerArea {
-  border: 1px solid black;
-  padding: 40px;       /* space inside the border */
-  min-height: 200px;   /* ensures it has visible area */
-  color: black;
-  margin-top: 200px;
+.Services-container {
+  display: flex;
+  flex-direction: column;       /* Stack items vertically */
+  justify-content: flex-start;  /* Start from top */
+  align-items: center;          /* Center horizontally */
+  height: 100vh;                /* Full viewport height */
+  background: radial-gradient(circle at center, rgba(128, 0, 128, 0.6), #000 80%);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 50px 20px;
+  box-sizing: border-box;
+}
+
+.headline {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 2px; /* Space between heading and model */
+  margin-top: 60px;
+  text-align: center;
+    /* Gradient text */
+  background: linear-gradient(45deg, #332f8d, #ff6ec7, #1f6262, #f5c609);
+  -webkit-background-clip: text; /* Clip gradient to text */
+  -webkit-text-fill-color: transparent; /* Make text itself transparent */
+  /* animation: gradientAnimation 5s ease infinite; */
+  background-size: 300% 300%;
+}
+/* Optional: Animate the gradient */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.model-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;  /* Adjust based on your model size */
+  height: 400px;     /* Adjust based on your model */
+}
+
+
+.right-content {
+  flex: 1;
+  position: relative;
+  height: 400px;
+  width: 400px;
+}
+
+.stack-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  animation: cycleImages 20s infinite;
+}
+
+/* Cycle each image with a delay */
+.stack-img:nth-child(1) { animation-delay: 0s; }
+.stack-img:nth-child(2) { animation-delay: 4s; }
+.stack-img:nth-child(3) { animation-delay: 8s; }
+.stack-img:nth-child(4) { animation-delay: 12s; }
+.stack-img:nth-child(5) { animation-delay: 16s; }
+
+@keyframes cycleImages {
+  0% { opacity: 0; transform: scale(0.9); z-index: 0; }
+  5% { opacity: 1; transform: scale(1); z-index: 1; }
+  20% { opacity: 1; transform: scale(1.05); z-index: 2; }
+  25% { opacity: 0; transform: scale(1.1); z-index: 0; }
+  100% { opacity: 0; }
 }

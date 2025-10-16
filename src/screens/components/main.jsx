@@ -49,9 +49,9 @@ const Main = () => {
   return (
     <section className="main-container">
       <div className="aura"></div>
-  <div className="aura"></div>
-  <div className="aura"></div>
-  <div className="aura"></div>
+      <div className="aura"></div>
+      <div className="aura"></div>
+      <div className="aura"></div>
       {/* Left Text Section */}
       <div className="left-content">
         <h1 className="headline">
@@ -62,9 +62,10 @@ const Main = () => {
         <p className="subtitle">
           We bring ideas to life through design, motion, and imagination.
         </p>
-        
 
-        <button className="contact-btn" style={{width: 150, marginTop: 50}}>Contact</button>
+        <button className="contact-btn" style={{ width: 150, marginTop: 50 }}>
+          Contact
+        </button>
       </div>
 
       {/* Right Image Scroller */}
