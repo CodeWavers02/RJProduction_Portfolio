@@ -775,7 +775,7 @@
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.3s ease;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .stat-card.visible {

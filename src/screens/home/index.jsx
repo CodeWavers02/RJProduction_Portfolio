@@ -1,9 +1,10 @@
 import React from "react";
-import Main from "../components/Main";
+import Main from "../components/main";
 import AboutMe from "../components/AboutMe";
 import AllServices from "../components/AllServices";
 import WhyChooseUs from "../components/WhyChooseUs";
 import Projects from "../components/Projects";
+import Footer from "../../global/Footer";
 
 const Home = () => {
   return (
@@ -17,9 +18,7 @@ const Home = () => {
       <AllServices />
       <WhyChooseUs />
       <Projects />
-      <div style={{ marginTop: "200px" }}>
-        {/* Additional content if needed */}
-      </div>
+      <Footer />
     </>
   );
 };

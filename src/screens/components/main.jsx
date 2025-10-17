@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./main.css";
 
 import img1 from "../../assets/img1.jpeg";
@@ -12,7 +12,8 @@ import img8 from "../../assets/img8.jpeg";
 import img9 from "../../assets/img9.png";
 
 const Main = () => {
-  const columnsRef = useRef([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
   const columns = [
     [img1, img2, img3],
@@ -21,66 +22,132 @@ const Main = () => {
   ];
 
   useEffect(() => {
-    const speeds = [2.0, 1.5, 2.2];
-
-    columnsRef.current.forEach((col, index) => {
-      const speed = speeds[index % speeds.length];
-      let translateY = 0;
-
-      const animate = () => {
-        if (!col) return;
-
-        translateY -= speed;
-        const scrollHeight = col.scrollHeight / 2;
-
-        // when the entire duplicated set has scrolled past → reset to 0
-        if (Math.abs(translateY) >= scrollHeight) {
-          translateY = 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
         }
+      },
+      { threshold: 0.3 }
+    );
 
-        col.style.transform = `translateY(${translateY}px)`;
-        requestAnimationFrame(animate);
-      };
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-      requestAnimationFrame(animate);
-    });
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
-  return (
-    <section className="main-container">
-      <div className="aura"></div>
-  <div className="aura"></div>
-  <div className="aura"></div>
-  <div className="aura"></div>
-      {/* Left Text Section */}
-      <div className="left-content">
-        <h1 className="headline">
-          The ART <br />
-          Of Digital <br />
-          Engagement
-        </h1>
-        <p className="subtitle">
-          We bring ideas to life through design, motion, and imagination.
-        </p>
-        
+  const scrollToServices = () => {
+    const servicesSection = document.querySelector('.services-section');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
-        <button className="contact-btn" style={{width: 150, marginTop: 50}}>Contact</button>
+  return (
+    <section className="main-container" ref={sectionRef}>
+      {/* Background Elements */}
+      <div className="main-bg-grid"></div>
+      <div className="main-floating-shapes">
+        <div className="main-shape main-shape-1"></div>
+        <div className="main-shape main-shape-2"></div>
+        <div className="main-shape main-shape-3"></div>
       </div>
 
-      {/* Right Image Scroller */}
-      <div className="right-gallery">
-        {columns.map((colImages, colIndex) => (
-          <div
-            className="column"
-            key={colIndex}
-            ref={(el) => (columnsRef.current[colIndex] = el)}
-          >
-            {/* Duplicate twice for seamless loop */}
-            {[...colImages, ...colImages].map((img, i) => (
-              <img src={img} alt={`gallery-${colIndex}-${i}`} key={i} />
+      {/* Content */}
+      <div className="main-content-wrapper">
+        {/* Left Text Section */}
+        <div className={`main-left-content ${isVisible ? 'main-visible' : ''}`}>
+          <div className="main-badge">Digital Creator</div>
+          
+          <h1 className="main-headline">
+            <span className="main-headline-line">Crafting Digital</span>
+            <span className="main-headline-gradient">Experiences</span>
+            <span className="main-headline-line">That Inspire</span>
+          </h1>
+          
+          <p className="main-subtitle">
+            I blend creativity with technology to build engaging digital solutions 
+            that drive real results for your business.
+          </p>
+
+          {/* Quick Stats */}
+          <div className="main-stats">
+            <div className="main-stat">
+              <div className="main-stat-number">150+</div>
+              <div className="main-stat-label">Projects</div>
+            </div>
+            <div className="main-stat">
+              <div className="main-stat-number">5+</div>
+              <div className="main-stat-label">Years</div>
+            </div>
+            <div className="main-stat">
+              <div className="main-stat-number">100%</div>
+              <div className="main-stat-label">Satisfaction</div>
+            </div>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="main-actions">
+            <button className="main-cta primary" onClick={scrollToServices}>
+              <span>View Services</span>
+              <div className="main-cta-arrow">→</div>
+            </button>
+            <button className="main-cta secondary">
+              View Portfolio
+            </button>
+          </div>
+
+          {/* Social Proof */}
+          <div className="main-social-proof">
+            <div className="main-clients">
+              <div className="main-client-avatars">
+                <div className="main-client-avatar"></div>
+                <div className="main-client-avatar"></div>
+                <div className="main-client-avatar"></div>
+              </div>
+              <div className="main-client-text">
+                <strong>50+</strong> satisfied clients worldwide
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Image Scroller - CSS Animation */}
+        <div className="main-right-gallery">
+          <div className="main-gallery-container">
+            {columns.map((colImages, colIndex) => (
+              <div
+                className="main-column"
+                key={colIndex}
+                style={{ 
+                  animationDelay: `${colIndex * 2}s`,
+                  animationDuration: `${15 + colIndex * 3}s`
+                }}
+              >
+                {/* Triple duplication for seamless loop */}
+                {[...colImages, ...colImages, ...colImages].map((img, i) => (
+                  <div className="main-image-wrapper" key={i}>
+                    <img 
+                      src={img} 
+                      alt={`gallery-${colIndex}-${i}`} 
+                      className="main-gallery-image"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
             ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

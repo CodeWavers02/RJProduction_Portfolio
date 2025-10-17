@@ -176,10 +176,10 @@ const AllServices = () => {
                   <div className="services-card-expanded">
                     <div className="services-card-header">
                       <h3 className="services-card-title">{service.title}</h3>
-                      <div className="services-card-indicator">
+                      {/* <div className="services-card-indicator">
                         <div className="services-indicator-dot"></div>
                         <span>ACTIVE</span>
-                      </div>
+                      </div> */}
                     </div>
                     
                     <p className="services-card-description">{service.description}</p>
