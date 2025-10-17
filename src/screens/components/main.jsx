@@ -42,26 +42,24 @@ const Main = () => {
     };
   }, []);
 
-  return (
-    <section className="main-container">
-      <div className="aura"></div>
-      <div className="aura"></div>
-      <div className="aura"></div>
-      <div className="aura"></div>
-      {/* Left Text Section */}
-      <div className="left-content">
-        <h1 className="headline">
-          The ART <br />
-          Of Digital <br />
-          Engagement
-        </h1>
-        <p className="subtitle">
-          We bring ideas to life through design, motion, and imagination.
-        </p>
+  const scrollToServices = () => {
+    const servicesSection = document.querySelector('.services-section');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
-        <button className="contact-btn" style={{ width: 150, marginTop: 50 }}>
-          Contact
-        </button>
+  return (
+    <section className="main-container" ref={sectionRef}>
+      {/* Background Elements */}
+      <div className="main-bg-grid"></div>
+      <div className="main-floating-shapes">
+        <div className="main-shape main-shape-1"></div>
+        <div className="main-shape main-shape-2"></div>
+        <div className="main-shape main-shape-3"></div>
       </div>
 
       {/* Content */}
