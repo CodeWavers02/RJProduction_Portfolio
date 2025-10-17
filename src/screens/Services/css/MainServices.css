@@ -73,3 +73,66 @@
   25% { opacity: 0; transform: scale(1.1); z-index: 0; }
   100% { opacity: 0; }
 }
+/* Floating Boxes */
+.floating-box {
+  position: absolute;
+  background: rgba(243, 243, 243, 0.08);
+  border-radius: 15px;
+  padding: 20px 10px;
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.floating-box:hover {
+  transform: scale(1.05);
+}
+
+/* Customize positions */
+.box1 {
+  top: 50%;
+  right: 60%;
+}
+
+.floating-btn {
+  background: linear-gradient(90deg, #ff0077, #ff4b2b);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 25px;
+  margin-left: 400px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+.floating-btn:hover {
+  background: linear-gradient(90deg, #ff4b2b, #ff0077);
+  transform: scale(1.05);
+}
+
+.box2 {
+  bottom: 15%;
+  left: 28%;
+}
+
+.box3 {
+  bottom: 25%;
+  left: 60%;
+}
+
+.floating-box h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.floating-box p {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  opacity: 1;
+}
+

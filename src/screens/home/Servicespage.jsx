@@ -5,7 +5,7 @@ function Servicespage() {
   return (
     <div>
       <MainServices />
-        <Servicespro />
+      <Servicespro />
     </div>
   )
 }
