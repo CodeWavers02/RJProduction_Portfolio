@@ -1,0 +1,45 @@
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  background: none;
+  padding: 20px 0;
+  box-sizing: border-box;
+  /* border-radius: 20px; */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.slider-track {
+  display: flex;
+  width: calc(200%); /* because we duplicated images */
+  animation: scroll 20s linear infinite;
+}
+
+.slider-item {
+  flex: 0 0 auto;
+  width: 200px; /* adjust size of brand logos */
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.slider-item img:hover {
+  transform: scale(1.1);
+}
+
+/* Infinite scroll animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

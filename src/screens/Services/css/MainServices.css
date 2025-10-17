@@ -4,11 +4,25 @@
   justify-content: flex-start;  /* Start from top */
   align-items: center;          /* Center horizontally */
   height: 100vh;                /* Full viewport height */
-  background: radial-gradient(circle at center, rgba(128, 0, 128, 0.6), #000 80%);
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0f0f0f 100%);
   color: #fff;
   font-family: 'Poppins', sans-serif;
   padding: 50px 20px;
   box-sizing: border-box;
+}
+
+.Services-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(74, 108, 247, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 87, 34, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(76, 175, 80, 0.05) 0%, transparent 50%);
+  animation: backgroundShift 8s ease-in-out infinite;
 }
 
 .headline {
