@@ -1,108 +1,136 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./css/Servicespro.css";
 
-const Servicespro = () => {
+const ExperienceSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
-  const projects = [
+  const services = [
     {
       id: 1,
       title: "Photography",
-      description: "Capture stunning visuals with our professional photography services.",
-      fullDescription: "Full photography description...",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop",
+      short:
+        "Capture stunning visuals with our professional photography services.",
+      full: "Our photography team captures timeless moments with precision lighting, angles, and creativity — from product shoots to portraits, every shot tells a story.",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
     },
     {
       id: 2,
       title: "Graphic Design",
-      description: "Creative and unique designs to make your brand stand out.",
-      fullDescription: "Full graphic design description...",
-      image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=500&h=300&fit=crop",
+      short: "Creative and unique designs to make your brand stand out.",
+      full: "We design visually stunning logos, brand identities, and marketing materials that reflect your brand personality and attract your target audience.",
+      image:
+        "https://images.unsplash.com/photo-1581291519195-ef11498d1cf5?w=800&h=500&fit=crop",
     },
     {
       id: 3,
-      title: "Social Media Marketing 1",
-      description: "Boost your presence with our tailored social media strategies.",
-      fullDescription: "Full marketing description...",
-      image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=500&h=300&fit=crop",
+      title: "Social Media Marketing",
+      short: "Boost your online presence with our marketing strategies.",
+      full: "Our expert marketers craft effective strategies to grow your social presence, drive engagement, and turn followers into loyal customers.",
+      image:
+        "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&h=500&fit=crop",
     },
-     {
+    {
       id: 4,
-      title: "Social Media Marketing 2",
-      description: "Boost your presence with our tailored social media strategies.",
-      fullDescription: "Full marketing description...",
-      image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=500&h=300&fit=crop",
-    },
-     {
-      id: 5,
-      title: "Social Media Marketing 3",
-      description: "Boost your presence with our tailored social media strategies.",
-      fullDescription: "Full marketing description...",
-      image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=500&h=300&fit=crop",
-    },
-     {
-      id: 6,
-      title: "Social Media Marketing 4",
-      description: "Boost your presence with our tailored social media strategies.",
-      fullDescription: "Full marketing description...",
-      image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=500&h=300&fit=crop",
+      title: "Websites & Applications",
+      short: "Build modern, fast, and responsive digital experiences.",
+      full: "We design and develop user-friendly, responsive websites and cross-platform applications. Whether it's an e-commerce site, portfolio, or custom mobile app, we ensure seamless performance, scalability, and elegant design.",
+      image:
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=500&fit=crop",
     },
   ];
 
   const handleCardClick = (index) => {
     if (index === activeIndex) {
-      // Center card clicked → open modal
-      setModalOpen(true);
+      // If already centered → open modal
+      setSelectedCard(services[index]);
     } else {
-      // Side card clicked → swap to center
+      // Otherwise bring that card to center
       setActiveIndex(index);
     }
   };
 
   return (
-    <section className="servicespro-section">
-      <h1 className="servicespro-title">Our Services</h1>
+    <section className="experience-section">
+      <div className="experience-container">
+        <h2 className="section-title">
+          Our <span className="text-gradient">Services</span>
+        </h2>
 
-      <div className="carousel-container">
-        <div className="carousel">
-          {projects.map((project, index) => {
-            let position = index - activeIndex;
-            if (position < -1) position += projects.length;
-            if (position > 1) position -= projects.length;
+        {/* --- Cards Carousel --- */}
+        <div className="card-carousel">
+          {services.map((service, index) => {
+            let position = (index - activeIndex + services.length) % services.length;
+
+            let transformStyle = "";
+            let zIndex = 0;
+            let opacity = 1;
+
+            if (position === 0) {
+              transformStyle = "translateX(0) scale(1)";
+              zIndex = 3;
+            } else if (position === 1) {
+              transformStyle = "translateX(250px) scale(0.8)";
+              zIndex = 2;
+              opacity = 0.8;
+            } else if (position === 2) {
+              transformStyle = "translateX(-250px) scale(0.8)";
+              zIndex = 1;
+              opacity = 0.8;
+            } else {
+              transformStyle = "translateX(600px) scale(0.6)";
+              opacity = 0;
+            }
 
             return (
               <div
-                key={project.id}
-                className={`carousel-card ${
-                  position === 0 ? "active" : ""
-                } ${position === -1 ? "left" : ""} ${
-                  position === 1 ? "right" : ""
-                }`}
+                key={service.id}
+                className={`carousel-card ${index === activeIndex ? "active" : ""}`}
+                style={{
+                  backgroundImage: `url(${service.image})`,
+                  transform: transformStyle,
+                  zIndex,
+                  opacity,
+                }}
                 onClick={() => handleCardClick(index)}
               >
-                <img src={project.image} alt={project.title} />
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+                <div className="carousel-overlay">
+                  <h3>{service.title}</h3>
+                  <p>{service.short}</p>
+                </div>
               </div>
             );
           })}
         </div>
-      </div>
 
-      {modalOpen && (
-        <div className="modal-backdrop" onClick={() => setModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{projects[activeIndex].title}</h2>
-            <p>{projects[activeIndex].fullDescription}</p>
-            <button className="close-btn" onClick={() => setModalOpen(false)}>
-              Close
-            </button>
+        {/* --- Modal --- */}
+        {selectedCard && (
+          <div className="service-modal">
+            <div
+              className="modal-overlay"
+              onClick={() => setSelectedCard(null)}
+            ></div>
+            <div className="modal-content">
+              <button
+                className="close-btn"
+                onClick={() => setSelectedCard(null)}
+              >
+                ✖
+              </button>
+              <img
+                src={selectedCard.image}
+                alt={selectedCard.title}
+                className="modal-img"
+              />
+              <h2>{selectedCard.title}</h2>
+              <p>{selectedCard.full}</p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };
 
-export default Servicespro;
+export default ExperienceSection;
