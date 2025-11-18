@@ -1,85 +1,239 @@
-.servicespro-section {
-  height: 700px;
-  padding: 4rem 2rem;
-  background: #111;
+/* --- Services Grid --- */
+.services-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: #16161a;
   color: #fff;
-  text-align: center;
-  position: relative;
+  border-radius: 16px;
   overflow: hidden;
+  width: 300px;
+  cursor: pointer;
+  padding-bottom: 1rem;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.servicespro-title {
-  font-size: 3rem;
-  margin-bottom: 3rem;  
-  background: linear-gradient(135deg, #4a6cf7, #a855f7, #ec4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.service-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
-.carousel-container {
+.service-card h3 {
+  margin: 0.8rem 0 0.3rem;
+  font-size: 1.25rem;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+  padding: 0 1rem;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Modal --- */
+.service-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
-.carousel {
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: #101014;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 18px;
+  max-width: 600px;
+  width: 90%;
+  z-index: 1010;
+  animation: scaleUp 0.3s ease forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.modal-content p {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+  color: #d3d3da;
+}
+
+.modal-img {
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #ff5f9e;
+}
+
+/* --- Carousel Layout --- */
+.card-carousel {
+  position: relative;
+  height: 400px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  perspective: 1200px;
-  width: 70%;
-  position: relative;
+  perspective: 1000px;
 }
 
 .carousel-card {
-  min-width: 300px;
-  height: 400px;
-  background: #222;
-  border-radius: 20px;
-  overflow: hidden;
   position: absolute;
-  top: 0;
+  width: 300px;
+  height: 360px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  text-align: center;
-  padding: 1rem;
-  transition: all 0.5s ease;
-  opacity: 0.7;
-  transform: scale(0.85) translateX(0);
-  z-index: 1;
+  transition: all 0.8s cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-.carousel-card img {
+.carousel-card:hover {
+  transform: scale(1.03);
+}
+
+.carousel-overlay {
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  height: 60%;
-  object-fit: cover;
-  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 1rem;
+  color: #fff;
+  border-radius: 0 0 20px 20px;
 }
 
-.carousel-card h3 {
-  margin: 1rem 0 0.5rem;
-  font-size: 1.5rem;
+.carousel-overlay h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
 }
 
-.carousel-card p {
+.carousel-overlay p {
   font-size: 0.9rem;
+  color: #d4d4d4;
+}
+/* --- Modal Styling --- */
+.service-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  position: relative;
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 550px;
+  z-index: 1010;
+  animation: scaleUp 0.3s ease forwards;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.modal-content h2 {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+}
+
+.modal-content p {
+  margin-top: 0.8rem;
   color: #ccc;
+  line-height: 1.6;
 }
 
-/* Positions */
-.carousel-card.active {
-  transform: translateX(0) scale(1);
-  z-index: 3;
-  opacity: 1;
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.carousel-card.left {
-  transform: translateX(-200px) scale(0.85);
-  z-index: 2;
+.close-btn:hover {
+  color: #ff5f9e;
 }
 
-.carousel-card.right {
-  transform: translateX(200px) scale(0.85);
-  z-index: 2;
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

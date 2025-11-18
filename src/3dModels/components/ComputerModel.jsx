@@ -2,7 +2,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function ComputerModel(props) {
-  const { nodes, materials } = useGLTF('../public/3Dmodels/ComputerModel.glb') // ✅ use root path, public/ auto served
+  const { nodes, materials } = useGLTF('../3Dmodels/ComputerModel.glb') // ✅ use root path, public/ auto served
   return (
     <group scale={[120, 120, 120]} >
       <group position={[0.121, 0.007, 0]}>
