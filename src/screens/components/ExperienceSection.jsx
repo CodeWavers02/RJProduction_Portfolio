@@ -1,115 +1,120 @@
-import React, { useEffect, useState, useRef } from "react";
+// ExperienceSection.jsx
+import React, { useEffect, useRef, useState } from "react";
 import "./aboutme.css";
 
 const ExperienceSection = () => {
-  const [projectsCount, setProjectsCount] = useState(0);
-  const [experienceCount, setExperienceCount] = useState(0);
-  const [countersVisible, setCountersVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  
-  const experienceRef = useRef(null);
+  const [counters, setCounters] = useState({
+    projects: 0,
+    experience: 0,
+    clients: 0,
+    satisfaction: 0,
+  });
+
   const sectionRef = useRef(null);
 
-  // Intersection Observer for section animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+
+          animateCounter(0, 250, 2000, (value) =>
+            setCounters((prev) => ({ ...prev, projects: value }))
+          );
+          animateCounter(0, 5, 1500, (value) =>
+            setCounters((prev) => ({ ...prev, experience: value }))
+          );
+          animateCounter(0, 120, 1800, (value) =>
+            setCounters((prev) => ({ ...prev, clients: value }))
+          );
+          animateCounter(0, 98, 2000, (value) =>
+            setCounters((prev) => ({ ...prev, satisfaction: value }))
+          );
         }
       },
       { threshold: 0.3 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-
-  // Intersection Observer for counter animation
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setCountersVisible(true);
-          // Animate projects count
-          animateCounter(0, 150, 2000, setProjectsCount);
-          // Animate experience count
-          animateCounter(0, 3, 1500, setExperienceCount);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (experienceRef.current) {
-      observer.observe(experienceRef.current);
-    }
-
-    return () => {
-      if (experienceRef.current) {
-        observer.unobserve(experienceRef.current);
-      }
-    };
+    return () =>
+      sectionRef.current && observer.unobserve(sectionRef.current);
   }, []);
 
   const animateCounter = (start, end, duration, setter) => {
     let startTimestamp = null;
     const step = (timestamp) => {
       if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const progress = Math.min(
+        (timestamp - startTimestamp) / duration,
+        1
+      );
       const value = Math.floor(progress * (end - start) + start);
       setter(value);
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
+      if (progress < 1) window.requestAnimationFrame(step);
     };
     window.requestAnimationFrame(step);
   };
 
   return (
-    <div className={`section experience-section ${isVisible ? 'visible' : ''}`} ref={sectionRef}>
-      <div className="experience-container" ref={experienceRef}>
-        <h2 className="experience-title slide-up">
-          My Journey in Numbers
-        </h2>
-        <div className="stats-grid">
-          <div className="stat-card scale-in">
-            <div className="stat-icon">🚀</div>
-            <div className="stat-number">
-              {countersVisible && <span className="count-animation">{projectsCount}+</span>}
-            </div>
-            <div className="stat-label">Projects Completed</div>
-            <p className="stat-description">
-              Successful digital projects delivered with excellence and creativity
-            </p>
-          </div>
-          
-          <div className="stat-card scale-in" style={{animationDelay: '0.2s'}}>
-            <div className="stat-icon">⏳</div>
-            <div className="stat-number">
-              {countersVisible && <span className="count-animation">{experienceCount}+</span>}
-            </div>
-            <div className="stat-label">Years Experience</div>
-            <p className="stat-description">
-              Years of dedicated service in digital marketing and web development
-            </p>
-          </div>
+    <section className="experience-section" ref={sectionRef}>
+      <div className="experience-container">
+        <div className={`experience-header ${isVisible ? "visible" : ""}`}>
+          <div className="section-badge">Proven Results</div>
+          <h2 className="section-title">
+            Driving <span className="text-gradient">Digital Success</span> Stories
+          </h2>
+          <p className="section-description">
+            Real numbers, real clients, real impact. See how data-driven strategies
+            deliver exceptional results.
+          </p>
         </div>
-        
-        {/* Animated background elements */}
-        <div className="floating-shapes">
-          <div className="shape shape-1"></div>
-          <div className="shape shape-2"></div>
-          <div className="shape shape-3"></div>
+
+        <div className="stats-grid">
+          {[
+            {
+              number: counters.projects,
+              suffix: "+",
+              label: "Campaigns Launched",
+              description: "Successful digital marketing campaigns",
+              icon: "🚀",
+            },
+            {
+              number: counters.experience,
+              suffix: "+",
+              label: "Years Experience",
+              description: "Of digital marketing excellence",
+              icon: "⏳",
+            },
+            {
+              number: counters.satisfaction,
+              suffix: "%",
+              label: "Client Satisfaction",
+              description: "Exceptional service delivery",
+              icon: "🎯",
+            },
+          ].map((stat, index) => (
+            <div
+              key={index}
+              className={`stat-card ${isVisible ? "visible" : ""}`}
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              <div className="stat-icon">{stat.icon}</div>
+              <div className="stat-content">
+                <div className="stat-number">
+                  {stat.number}
+                  {stat.suffix}
+                </div>
+                <div className="stat-label">{stat.label}</div>
+                <p className="stat-description">{stat.description}</p>
+              </div>
+              <div className="stat-glow" />
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

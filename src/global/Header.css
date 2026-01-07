@@ -11,21 +11,76 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #0f0c29;
   color: white;
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 60px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  backdrop-filter: blur(0px);
+}
+
+/* Scrolled state with cloud-like background effect */
+.header.scrolled {
+  background: rgba(15, 12, 41, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 12px 60px;
+  animation: cloudAppear 0.6s ease-out;
+}
+
+/* Cloud-like background animation */
+@keyframes cloudAppear {
+  0% {
+    background: rgba(15, 12, 41, 0);
+    backdrop-filter: blur(0px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  50% {
+    background: rgba(15, 12, 41, 0.6);
+    backdrop-filter: blur(10px);
+  }
+  100% {
+    background: rgba(15, 12, 41, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Smooth background transition on scroll */
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 12, 41, 0.1) 0%,
+    rgba(15, 12, 41, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.header.scrolled::before {
+  opacity: 1;
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 1px;
+  transition: transform 0.3s ease;
+}
+
+.header.scrolled .logo {
+  transform: scale(0.95);
 }
 
 .nav ul {
@@ -37,32 +92,125 @@
 
 .nav a {
   text-decoration: none;
-  /* color: white; */
+  color: white;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 8px 0;
 }
 
 .nav a:hover {
   color: #007bff;
 }
 
+/* Underline animation for nav links */
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #007bff;
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
 .contact-btn {
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-  padding: 8px 16px;
+  background-color: transparent;
+  color: white;
+  /* border: 2px solid white; */
+  padding: 8px 20px;
   border-radius: 25px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); */
+  transition: left 0.5s;
+}
+
+.contact-btn:hover::before {
+  left: 100%;
 }
 
 .contact-btn:hover {
-  background-color: #333;
-  color: white;
-  border: 1px solid black;
+  background-color: white;
+  color: #0f0c29;
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
+
 .logo img {
   height: 80px;
   width: auto;
+  transition: all 0.3s ease;
+}
+
+.header.scrolled .logo img {
+  height: 70px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 30px;
+  }
+  
+  .header.scrolled {
+    padding: 12px 30px;
+  }
+  
+  .nav ul {
+    gap: 20px;
+  }
+  
+  .logo img {
+    height: 60px;
+  }
+  
+  .header.scrolled .logo img {
+    height: 55px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 12px 20px;
+  }
+  
+  .header.scrolled {
+    padding: 10px 20px;
+  }
+  
+  .nav ul {
+    gap: 15px;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  
+  .header.scrolled .logo img {
+    height: 45px;
+  }
+  
+  .contact-btn {
+    padding: 6px 15px;
+    font-size: 0.9rem;
+  }
 }

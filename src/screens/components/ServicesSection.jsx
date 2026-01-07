@@ -1,57 +1,53 @@
-import React, { useEffect, useState, useRef } from "react";
+// ServicesSection.jsx
+import React, { useEffect, useRef, useState } from "react";
 import "./aboutme.css";
-import web from "../../assets/img1.jpeg";
-import marketing from "../../assets/img2.jpg";
-import photography from "../../assets/img3.jpeg";
-import creative from "../../assets/img4.jpeg";
-import strategy from "../../assets/img5.jpeg";
 
-const ServicesSection = () => {
-  const roles = [
-    "Social Media Marketing",
-    "Creative Services",
-    "Photography & Videography",
-    "Digital Branding",
-    "Marketing Strategy",
-  ];
+const ServicesSection = React.forwardRef((props, ref) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeService, setActiveService] = useState(0);
+  const [hoveredService, setHoveredService] = useState(null);
+  const sectionRef = useRef(null);
+
+  // Combine forwarded ref with local ref
+  React.useImperativeHandle(ref, () => ({
+    scrollIntoView: (options) => sectionRef.current?.scrollIntoView(options),
+  }));
 
   const services = [
     {
-      img: web,
-      title: "Web Design & Development",
-      desc: "Creating responsive and user-friendly websites that connect technology and creativity.",
+      icon: "🚀",
+      title: "Digital Strategy & Consulting",
+      description:
+        "Comprehensive digital marketing strategies tailored to your business goals. We analyze, plan, and execute campaigns that deliver real results.",
+      features: ["Market Analysis", "Strategy Development", "KPI Tracking", "ROI Optimization"],
+      color: "#0077ff",
     },
     {
-      img: marketing,
+      icon: "📱",
       title: "Social Media Marketing",
-      desc: "Boosting engagement and visibility with smart campaigns and content strategies.",
+      description:
+        "Engage your audience across all social platforms with compelling content and data-driven campaigns that build community and drive conversions.",
+      features: ["Content Creation", "Community Management", "Paid Advertising", "Analytics"],
+      color: "#00c6ff",
     },
     {
-      img: photography,
-      title: "Photography & Videography",
-      desc: "Capturing professional visuals that enhance your brand identity and storytelling.",
+      icon: "🔍",
+      title: "SEO & Content Marketing",
+      description:
+        "Boost your online visibility and organic traffic with strategic SEO optimization and high-quality content that ranks and converts.",
+      features: ["Keyword Research", "On-Page SEO", "Content Strategy", "Link Building"],
+      color: "#764ba2",
     },
     {
-      img: creative,
-      title: "Creative Design",
-      desc: "Designing impactful visuals from brochures to packaging that express your brand.",
-    },
-    {
-      img: strategy,
-      title: "Marketing Strategy",
-      desc: "Building data-driven marketing solutions to help brands reach the right audience.",
+      icon: "💡",
+      title: "PPC & Conversion Optimization",
+      description:
+        "Maximize your advertising budget with targeted PPC campaigns and conversion rate optimization that turns visitors into customers.",
+      features: ["Google Ads", "Facebook Ads", "Landing Pages", "A/B Testing"],
+      color: "#ff6b6b",
     },
   ];
 
-  const [currentRole, setCurrentRole] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [deleting, setDeleting] = useState(false);
-  const [currentService, setCurrentService] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  
-  const sectionRef = useRef(null);
-
-  // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -73,84 +69,72 @@ const ServicesSection = () => {
     };
   }, []);
 
-  // Typing effect
-  useEffect(() => {
-    const fullText = roles[currentRole];
-    const typingSpeed = deleting ? 60 : 120;
-
-    const timeout = setTimeout(() => {
-      if (!deleting && displayText.length < fullText.length) {
-        setDisplayText(fullText.substring(0, displayText.length + 1));
-      } else if (deleting && displayText.length > 0) {
-        setDisplayText(fullText.substring(0, displayText.length - 1));
-      } else if (!deleting && displayText.length === fullText.length) {
-        setTimeout(() => setDeleting(true), 1000);
-      } else if (deleting && displayText.length === 0) {
-        setDeleting(false);
-        setCurrentRole((prev) => (prev + 1) % roles.length);
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, deleting, roles, currentRole]);
-
-  // Auto-switch service
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentService((prev) => (prev + 1) % services.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [services.length]);
-
   return (
-    <div className={`section services-section ${isVisible ? 'visible' : ''}`} ref={sectionRef}>
-      <div className="content-wrapper">
-        <h1 className="typed-heading">
-          I specialize in <br />
-          <span className="dynamic-text">{displayText}</span>
-          <span className="cursor">|</span>
-        </h1>
+    <section className="services-section" ref={sectionRef}>
+      <div className="services-container">
+        <div className={`services-header ${isVisible ? "visible" : ""}`}>
+          {/* <div className="section-badge">Digital Marketing Services</div> */}
+          <h2 className="section-title">
+            Drive <span className="text-gradient">Explosive Growth</span> For Your Business
+          </h2>
+          <p className="section-description">
+            Data-driven digital marketing solutions that connect with your audience, build brand
+            loyalty, and deliver measurable business results.
+          </p>
+        </div>
 
-        <p className="intro-text">
-          Helping businesses build a strong digital presence through design,
-          branding, and interactive web & mobile experiences.
-        </p>
-
-        {/* Fixed service boxes with changing content */}
-        <div className="service-showcase">
-          <div className="service-box image-box floating">
-            <div className="service-content">
-              <img 
-                src={services[currentService].img} 
-                alt={services[currentService].title}
-                key={currentService}
-                className="service-image"
-              />
-              <div className="image-overlay"></div>
-            </div>
+        <div className="services-content">
+          {/* Service Navigation */}
+          <div className="services-navigation">
+            {services.map((service, index) => (
+              <button
+                key={index}
+                className={`service-nav-item ${activeService === index ? "active" : ""}`}
+                onClick={() => setActiveService(index)}
+                onMouseEnter={() => setHoveredService(index)}
+                onMouseLeave={() => setHoveredService(null)}
+                style={{ ["--service-color"]: service.color }}
+              >
+                <div className="nav-icon">{service.icon}</div>
+                <span className="nav-title">{service.title}</span>
+                <div className="nav-indicator"></div>
+              </button>
+            ))}
           </div>
-          <div className="service-box text-box slide-in">
-            <div className="service-content">
-              <h3 key={currentService} className="service-title">
-                {services[currentService].title}
-              </h3>
-              <p key={currentService + "desc"} className="service-desc">
-                {services[currentService].desc}
-              </p>
-              <div className="service-indicators">
-                {services.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`indicator ${index === currentService ? 'active' : ''}`}
-                  />
-                ))}
+
+          {/* Active Service Display */}
+          <div className="service-display">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className={`service-detail ${activeService === index ? "active" : ""}`}
+                style={{ ["--service-color"]: service.color }}
+              >
+                <div className="detail-header">
+                  <div className="detail-icon">{service.icon}</div>
+                  <h3 className="detail-title">{service.title}</h3>
+                </div>
+                <p className="detail-description">{service.description}</p>
+                <div className="detail-features">
+                  {service.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="feature-item">
+                      <div className="feature-check">✓</div>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <button className="detail-cta">
+                  Get Started
+                  <span className="cta-arrow">→</span>
+                </button>
+                <div className="service-glow" />
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
-};
+});
 
 export default ServicesSection;

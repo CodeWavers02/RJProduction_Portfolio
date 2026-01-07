@@ -2,87 +2,11 @@
 .main-container {
   min-height: 100vh;
   padding: 2rem 2rem 0rem 2rem;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(0, 119, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(108, 99, 255, 0.1) 0%, transparent 50%),
-    linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
   font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
-}
-
-/* Background Grid */
-.main-bg-grid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: main-grid-move 20s linear infinite;
-}
-
-@keyframes main-grid-move {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
-}
-
-/* Floating Shapes */
-.main-floating-shapes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-.main-shape {
-  position: absolute;
-  border-radius: 8px;
-  opacity: 0.1;
-  animation: main-shape-float 8s ease-in-out infinite;
-}
-
-.main-shape-1 {
-  width: 120px;
-  height: 120px;
-  background: #0077ff;
-  top: 15%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.main-shape-2 {
-  width: 80px;
-  height: 80px;
-  background: #6c63ff;
-  top: 65%;
-  right: 15%;
-  animation-delay: -3s;
-}
-
-.main-shape-3 {
-  width: 100px;
-  height: 100px;
-  background: #00c6ff;
-  bottom: 15%;
-  left: 20%;
-  animation-delay: -6s;
-}
-
-@keyframes main-shape-float {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
-  }
-  50% { 
-    transform: translateY(-20px) rotate(180deg); 
-  }
 }
 
 /* Content Wrapper */
